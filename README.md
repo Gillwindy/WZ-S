@@ -35,5 +35,5 @@ void loop()
 	Serial.print("HCHO ug:");
 	Serial.println(hcho_data.HCHO_ug);
   }
-  
+  delay(5000); //don't request data too frequent :P 
 }
