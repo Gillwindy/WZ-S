@@ -27,7 +27,7 @@ void loop()
 {
   // if using multiple software serial, you might want listen() before sending command!
   // ws_z_Serial.listen(); 
-  ws_z.requestData();
+  ws_z.requestData(); // passive mode require you to request data, active mode dont.
   if(ws_z.dataRead(hcho_data))
   {
 	Serial.print("HCHO PPB:");
