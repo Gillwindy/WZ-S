@@ -1,32 +1,32 @@
 #include <Arduino.h>
 #include <Stream.h>
-#include "WS_Z.h"
+#include "WZ_S.h"
 
 
-WS_Z::WS_Z(Stream& wstream)
+WZ_S::WZ_S(Stream& wstream)
 {
   this->_wstream = &wstream;
 }
 
-void WS_Z::passiveMode()
+void WZ_S::passiveMode()
 {
 	byte command[] = { 0xFF,0x01,0x78,0x41,0x00,0x00,0x00,0x00,0x46 };
 	_wstream->write(command, sizeof(command));
 }
 
-void WS_Z::activeMode()
+void WZ_S::activeMode()
 {
  	 byte command[] = { 0xFF,0x01,0x78,0x40,0x00,0x00,0x00,0x00,0x47 };
  	 _wstream->write(command, sizeof(command));
 }
 
-void WS_Z::requestData()
+void WZ_S::requestData()
 {
 	byte command[] = { 0xFF,0x01,0x86,0x00,0x00,0x00,0x00,0x00,0x79 };
 	_wstream->write(command, sizeof(command));
 }
 
-bool WS_Z::packetAvailable(void)
+bool WZ_S::packetAvailable(void)
 {
     if (!_wstream->available()) { _data->err_code = 3; return false;}
     while ((_wstream->peek() != WZ_S_START_TAG) && _wstream->available()) {
@@ -37,22 +37,22 @@ bool WS_Z::packetAvailable(void)
   return true;
 }
 
-bool WS_Z::dataRead(DATA& data)
+bool WZ_S::dataRead(DATA& data)
 {
 	_data = &data;
-	uint32_t node_ws_z = millis();
+	uint32_t node_wz_s = millis();
 	do
 	{
 		loop();
 		if (_status == OK) break;
-	} while (millis() - node_ws_z < 1000);
+	} while (millis() - node_wz_s < 1000);
 	return _status == OK;
 
 }
 
 
 
-void WS_Z::loop()
+void WZ_S::loop()
 {
 	_status = WAITING;
 	if (packetAvailable()) 
