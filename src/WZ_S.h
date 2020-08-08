@@ -1,8 +1,8 @@
-#ifndef WS_Z_H
-#define WS_Z_H
+#ifndef WZ_S_H
+#define WZ_S_H
 #define WZ_S_START_TAG 0Xff
 
-class WS_Z
+class WZ_S
 {	
 public:
 	struct DATA {
@@ -11,7 +11,7 @@ public:
 		uint8_t err_code;
 	};
 	
-	WS_Z(Stream&);
+	WZ_S(Stream&);
 	void passiveMode();
 	void activeMode();
 	void requestData();
