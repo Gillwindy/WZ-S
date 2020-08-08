@@ -13,7 +13,7 @@ Example using (Arduino Uno's) software serial at pin D8 and D9 connects to senso
 //Pin D9 TX
 //Pin D8 RX
 SoftwareSerial wz_s_Serial(8, 9);
-WZ_S ws_z(wz_s_Serial);
+WZ_S wz_s(wz_s_Serial);
 WZ_S::DATA hcho_data;
 
 void setup()
@@ -26,7 +26,7 @@ void setup()
 void loop()
 {
   // if using multiple software serial, you might want listen() before sending command!
-  // ws_z_Serial.listen(); 
+  // wz_s_Serial.listen(); 
   wz_s.requestData(); // passive mode require you to request data, active mode dont.
   if(wz_s.dataRead(hcho_data))
   {
