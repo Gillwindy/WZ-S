@@ -28,11 +28,11 @@ void WZ_S::requestData()
 
 bool WZ_S::packetAvailable(void)
 {
-    if (!_wstream->available()) { _data->err_code = 3; return false;}
+    if (!_wstream->available()) {return false;}
     while ((_wstream->peek() != WZ_S_START_TAG) && _wstream->available()) {
       _wstream->read(); 
     }
-    if (_wstream->available() < DATA_SIZE) { _data->err_code = 4; return false; }
+    if (_wstream->available() < DATA_SIZE) {return false; }
   
   return true;
 }
@@ -73,9 +73,7 @@ void WZ_S::loop()
 			_data->HCHO_ppb = makeWord(raw[6],raw[7]);
 			_data->HCHO_ugm3 = makeWord(raw[2],raw[3]);
 			
-		}else _data->err_code = 1;
-
+		}else 
 		_wstream->flush();
 	}
-	else  _data->err_code = 2;
 }
