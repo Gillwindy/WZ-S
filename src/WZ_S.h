@@ -8,7 +8,6 @@ public:
 	struct DATA {
 		uint16_t HCHO_ppb;
 		uint16_t HCHO_ugm3;
-		uint8_t err_code;
 	};
 	
 	WZ_S(Stream&);
